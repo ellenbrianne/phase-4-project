@@ -26,5 +26,17 @@ class Signup(Resource):
         
 api.add_resource(Signup, '/signup')
 
+class Login(Resource):
+    def post(self):
+        try:
+            user = User.query.filter_by(username=request.get_json()['username']).first()
+            if user.authenticate(request.get_json()['password']):
+                session['user_id'] = user.id
+                return make_response(user.to_dict(), 200)
+        except:
+            return ("Incorrect Username or Password", 401)
+
+api.add_resource(Login, '/login')
+
 if __name__ == "__main__":
   app.run(port=5555, debug=True)
