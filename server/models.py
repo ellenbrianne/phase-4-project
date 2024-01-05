@@ -8,7 +8,6 @@ class User(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     age = db.Column(db.Integer)
-    email = db.Column(db.String)
     ## add in username & password for auth
 
     serialize_rules = ('-experiences.user', )
