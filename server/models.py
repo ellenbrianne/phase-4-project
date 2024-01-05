@@ -1,14 +1,28 @@
-from config import db
+from config import db, bcrypt
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
+from sqlalchemy.ext.hybrid import hybrid_property
 
 class User(db.Model, SerializerMixin):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
+    username = db.Column(db.String)
+    email = db.Column(db.String)
+    _password_hash = db.Column(db.String)
     age = db.Column(db.Integer)
-    ## add in username & password for auth
+    
+    @hybrid_property
+    def _password_hash(self):
+        return self._password_hash
+    
+    @_password_hash.setter
+    def password_hash(self, password):
+        password_hash = bcrypt.generate_password_hash(password.encode('utf-8'))
+        self._password_hash = password_hash.decode('utf-8')
+
+    def authenticate(self, password):
+        return bcrypt.check_password_hash(self._password_hash, password.encode('utf-8'))
 
     serialize_rules = ('-experiences.user', )
 
