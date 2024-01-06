@@ -1,23 +1,39 @@
-// import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Navbar from './components/NavBar'
 import UserAuth from './components/UserAuth'
 
 
 function App() {
-  // const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null)
 
-  // if (!user) return (
-  //   <>
-  //     <Navbar></Navbar>
-  //     <UserAuth></UserAuth>
-  //   </>
-  // )
+  useEffect(() => {
+    getUser()
+  },[])
+
+  const addUser = (u) => setUser(u)
+
+  if (!user) return (
+    <>
+      <Navbar/>
+      <UserAuth addUser={addUser}/>
+    </>
+  )
+
+  function getUser () {
+    fetch('/api/auth')
+    .then(r => {
+      if(r.ok){
+        r.json()
+        .then(userObj => setUser(userObj))
+      } else {
+        setUser(null)
+      }
+    })
+  }
 
   return (
     <>
       <h1>Your Next Move!</h1>
-      <Navbar></Navbar>
-      <UserAuth></UserAuth>
     </>
   )
 }
