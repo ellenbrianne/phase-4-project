@@ -43,5 +43,16 @@ class Login(Resource):
 
 api.add_resource(Login, '/login')
 
+class Logout(Resource):
+    def delete(self):
+        try:
+            if session.get('user_id'):
+                session['user_id'] = None
+                return ('', 204)
+        except:
+            return ('No user currently logged in', 401)
+
+api.add_resource(Logout, '/logout')
+
 if __name__ == "__main__":
   app.run(port=5555, debug=True)
