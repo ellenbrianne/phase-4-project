@@ -15,14 +15,19 @@ api.add_resource(Auth, '/auth')
 
 class Signup(Resource):
     def post(self):
-        data = request.get_json()
-        user = User(username=data['username'], email=data['email'], age=data['age'])
-        user.password_hash = data['password']
+        try:
+            data = request.get_json()
+            user = User(username=data['username'], email=data['email'], age=data['age'])
+            user.password_hash = data['password']
 
-        db.session.add(user)
-        db.session.commit()
+            db.session.add(user)
+            db.session.commit()
 
-        return make_response(user.to_dict(), 201)
+            session['user_id'] = user.id
+
+            return make_response(user.to_dict(), 201)
+        except:
+            return ('Error in signing up', 422)
         
 api.add_resource(Signup, '/signup')
 
