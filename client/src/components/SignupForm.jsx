@@ -1,14 +1,8 @@
+import React from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-// import { useNavigate } from 'react-router-dom'
-import React, { useState } from 'react'
 
-
-function UserAuth ({ addUser }) {
-    const [signedUp, setSignedUp] = useState(false)
-    // const nav = useNavigate()
-
-    const handleClick = () => setSignedUp((signedUp) => !signedUp)
+function SignupForm ({ addUser, setSignedUp }) {
 
     const formSchema = yup.object().shape({
         username: yup.string().required(),
@@ -28,7 +22,7 @@ function UserAuth ({ addUser }) {
         validationSchema: formSchema,
 
         onSubmit: (values) => {
-            fetch(signedUp?'/api/login':'/api/signup', {
+            fetch('/api/signup', {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -39,6 +33,7 @@ function UserAuth ({ addUser }) {
               if(r.ok){
                 r.json().then(user => {
                   addUser(user)
+                  setSignedUp(true)
                   // add in nav(/) when you add Routes for landing page
                 })
               } else {
@@ -48,35 +43,23 @@ function UserAuth ({ addUser }) {
             })   
         },
       })
-
     return (
-        <>
-            <form onSubmit={formik.handleSubmit}>
+        <form>
             <label>
                 Username
             </label>
             <input type='text' name='username' value={formik.values.username} onChange={formik.handleChange} />
             <label>
-                Password
-            </label>
-            <input type='password' name='password' value={formik.values.password} onChange={formik.handleChange} />
-            {signedUp ? null : (
-            <>
-              <label>
               Email
-              </label>
-              <input type='text' name='email' value={formik.values.email} onChange={formik.handleChange} />
-              <label>
+            </label>
+            <input type='text' name='email' value={formik.values.email} onChange={formik.handleChange} />
+            <label>
                 Age
-              </label>
+            </label>
               <input type='text' name='age' value={formik.values.age} onChange={formik.handleChange} />
-            </>
-            )}
-            <input type='submit' value={signedUp ? 'Login' : 'Sign me up'} />
-          </form>
-          <button onClick={handleClick}>{signedUp ? 'Create an account' : 'Login'}</button>
-        </>
+            <input type='submit' value={'Sign me up'} />
+        </form>
     )
-};
+}
 
-export default UserAuth;
+export default SignupForm

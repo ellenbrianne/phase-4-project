@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import Navbar from './components/NavBar'
-import UserAuth from './components/UserAuth'
+import AuthPage from './components/AuthPage'
 
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
   if (!user) return (
     <>
       <Navbar/>
-      <UserAuth addUser={addUser}/>
+      <AuthPage addUser={addUser}/>
     </>
   )
 
