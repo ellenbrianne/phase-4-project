@@ -9,8 +9,8 @@ if __name__ == "__main__":
 		Location.query.delete()
 		Experience.query.delete()
 
-		u1 = User(name="jo shaw", age="22")
-		u2 = User(name="shane doe", age="34")
+		u1 = User(username="jo shaw", email="jo@bellsouth.net", age="22")
+		u2 = User(username="shane doe", email="shane@yahoo.com", age="34")
 		db.session.add_all([u1, u2])
 		db.session.commit()
 
