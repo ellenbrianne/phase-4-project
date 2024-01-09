@@ -65,7 +65,22 @@ class Experiences(Resource):
         
     def post(self):
         data = request.get_json()
+
+        try:
+            new_l = Location(city=data['city'], state=data['state'])
+            db.session.add(new_l)
+            db.session.commit()
+
+            new_e = Experience(
+                        length=data['length'], community=data['community'], crowds=data['crowds'],
+                        safety=data['safety'], user_id=data['user_id'], location_id=new_l.id)
+        except:
+            return ('Error creating new experience', 422)
         
+        db.session.add(new_e)
+        db.session.commit()
+
+        return make_response(new_e.to_dict(), 201)
         
 api.add_resource(Experiences, '/experiences')
 

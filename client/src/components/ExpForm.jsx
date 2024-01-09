@@ -22,7 +22,8 @@ function ExpForm ({ addExp, user }) {
           length:'',
           community:'',
           crowds:'',
-          safety:''
+          safety:'',
+          user_id: user.id
         },
 
         validationSchema: formSchema,
