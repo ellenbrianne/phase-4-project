@@ -1,8 +1,10 @@
 import React from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
+// import { useNavigate } from 'react-router-dom'
 
-function LoginForm ({ setSignedUp, addUser }) {
+function LoginForm ({ addUser }) {
+    // const nav = useNavigate()
 
     const formSchema = yup.object().shape({
         username: yup.string().required()
@@ -48,6 +50,7 @@ function LoginForm ({ setSignedUp, addUser }) {
                 Password
             </label>
             <input type='password' name='password' value={formik.values.password} onChange={formik.handleChange} />
+            <input type='submit' value={'Login'} />
         </form>
     )
 }

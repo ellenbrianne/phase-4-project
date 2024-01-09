@@ -1,8 +1,10 @@
 import React from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
+// import { useNavigate } from 'react-router-dom'
 
-function SignupForm ({ addUser, setSignedUp }) {
+function SignupForm ({ addUser }) {
+    // const nav = useNavigate()
 
     const formSchema = yup.object().shape({
         username: yup.string().required(),
@@ -33,7 +35,6 @@ function SignupForm ({ addUser, setSignedUp }) {
               if(r.ok){
                 r.json().then(user => {
                   addUser(user)
-                  setSignedUp(true)
                   // add in nav(/) when you add Routes for landing page
                 })
               } else {
@@ -44,7 +45,7 @@ function SignupForm ({ addUser, setSignedUp }) {
         },
       })
     return (
-        <form>
+        <form onSubmit={formik.handleSubmit}>
             <label>
                 Username
             </label>
@@ -57,6 +58,10 @@ function SignupForm ({ addUser, setSignedUp }) {
                 Age
             </label>
               <input type='text' name='age' value={formik.values.age} onChange={formik.handleChange} />
+            <label>
+                Password
+            </label>
+            <input type='password' name='password' value={formik.values.password} onChange={formik.handleChange} />
             <input type='submit' value={'Sign me up'} />
         </form>
     )
