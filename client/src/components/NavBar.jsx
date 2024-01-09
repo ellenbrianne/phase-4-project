@@ -1,7 +1,7 @@
 import React from 'react'
-import ExpContainer from './ExpContainer'
+import { Link } from 'react-router-dom'
 
-function NavBar ({ delUser, experiences }) {
+function NavBar ({ delUser }) {
 
     function handleDelUser () {
         fetch('/api/logout', { method: 'DELETE' }).then(r => {
@@ -16,9 +16,8 @@ function NavBar ({ delUser, experiences }) {
 
     return (
         <>
-            <h1>Home</h1>
-            <h1>Other Users' Experiences</h1>
-            <ExpContainer experiences={experiences} />
+            <Link to="/">Home</Link>
+            <Link to="/experiences">Other Users' Experiences</Link>
             <button onClick={handleDelUser}>Logout</button>
         </>
         

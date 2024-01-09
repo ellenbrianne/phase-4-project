@@ -2,11 +2,15 @@ import React from 'react'
 import ExpCard from './ExpCard'
 
 function ExpContainer ({ experiences }) {
+
+    const exDisplay = experiences.map(e => (
+        <ExpCard key ={e.id} experience={e} />
+    ))
     
     
     return (
         <>
-            {experiences.map(e => <ExpCard key={e.id} experience={e} />)}
+            {exDisplay}
         </>
     )
 }

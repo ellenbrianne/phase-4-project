@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import Navbar from './components/NavBar'
 import AuthPage from './components/AuthPage'
+import { Routes, Route } from 'react-router-dom'
+import ExpContainer from './components/ExpContainer'
+import Home from './components/Home'
 
 
 function App() {
@@ -34,15 +37,18 @@ function App() {
 
   if (!user) return (
     <>
-      <h1>Your Next Move!</h1>
+      <h1>Signup or Login to see Your Next Move!</h1>
       <AuthPage addUser={addUser}/>
     </>
   )
 
   return (
     <>
-      <h1>Your Next Move!</h1>
-      <Navbar delUser={setUser} experiences={exp}/>
+      <Navbar delUser={setUser}/>
+      <Routes>
+        <Route path="/experiences" element={<ExpContainer experiences={exp}/>} />
+        <Route exact path='/' element={<Home />} />
+      </Routes>
     </>
   )
 }
