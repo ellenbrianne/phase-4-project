@@ -63,6 +63,10 @@ class Experiences(Resource):
         except:
             return ('There are currently no experiences to show', 204)
         
+    def post(self):
+        data = request.get_json()
+        
+        
 api.add_resource(Experiences, '/experiences')
 
 
