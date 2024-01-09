@@ -54,5 +54,17 @@ class Logout(Resource):
 
 api.add_resource(Logout, '/logout')
 
+class Experiences(Resource):
+
+    def get(self):
+        try:
+            exp_list = [e.to_dict() for e in Experience.query.all()]
+            return make_response(exp_list, 200)
+        except:
+            return ('There are currently no experiences to show', 204)
+        
+api.add_resource(Experiences, '/experiences')
+
+
 if __name__ == "__main__":
   app.run(port=5555, debug=True)
