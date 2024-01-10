@@ -22,9 +22,13 @@ export default ExpCard
 const Card = styled.div`
     grid-template-rows: max-content 150px 1fr;
     border-radius: 5px white;
-    border: 2px solid white;
+    border: 2px solid pink;
     display: flex;
     padding: 0.6em 1.2em;
+    a{
+      color: white;
+      font-family: arial;
+    }
 `;
 
 const Container = styled.div`
