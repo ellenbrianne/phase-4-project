@@ -1,19 +1,15 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function ExpCard ({ experience }) {
-    const { id, length, community, crowds, safety, location, user } = experience
-    //put link in here to individual /experiences/<:id> route eventually
+    const { id, length, location } = experience
    
     return (
         <div id={id}>
-            <p>Location: {location.city}, {location.state}</p>
-            <p>Duration of experience: {length}</p>
-            <ul>
-                <li>Community: {community}/5</li>
-                <li>Crowds: {crowds}/5</li>
-                <li>Safety: {safety}/5</li>
-            </ul>
-            <p>Username: {user.username}, Age: {user.age}</p>
+            <Link to={`/experiences/${id}`}>
+                <p>Location: {location.city}, {location.state}</p>
+                <p>Duration of experience: {length}</p>
+            </Link>
         </div>
     )
 }

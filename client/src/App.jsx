@@ -5,7 +5,7 @@ import { Routes, Route } from 'react-router-dom'
 import ExpContainer from './components/ExpContainer'
 import Home from './components/Home'
 import ExpForm from './components/ExpForm'
-import ExpInd from './components/ExpInd'
+import ExpID from './components/ExpID'
 
 
 function App() {
@@ -38,6 +38,12 @@ function App() {
     setExp((currExp) => [...currExp, e])
   }
 
+  function delExp (delE) {
+    setExp((currExp) => currExp.filter(e => (
+      e.id != delE.id
+    )))
+  }
+
   const addUser = (u) => setUser(u)
   // change this to context to avoid drilling through AuthPage?
 
@@ -53,7 +59,7 @@ function App() {
       <Navbar delUser={setUser}/>
       <Routes>
         <Route path="/experiences/new" element={<ExpForm addExp={addExp} user={user}/>} />
-        <Route path="/experiences/:id" element={<ExpInd />} />
+        <Route path="/experiences/:id" element={<ExpID currUser={user} delExp={delExp}/>} />
         <Route path="/experiences" element={<ExpContainer experiences={exp}/>} />
         <Route exact path='/' element={<Home exp={exp} currUser={user}/>} />
       </Routes>

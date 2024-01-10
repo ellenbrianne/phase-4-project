@@ -17,7 +17,7 @@ function NavBar ({ delUser }) {
     return (
         <>
             <Link to="/">Home</Link>
-            <Link to="/experiences">Other Users' Experiences</Link>
+            <Link to="/experiences">All Experiences</Link>
             <button onClick={handleDelUser}>Logout</button>
         </>
         

@@ -84,6 +84,27 @@ class Experiences(Resource):
         
 api.add_resource(Experiences, '/experiences')
 
+class ExperienceID(Resource):
+
+    def get(self, id):
+        try:
+            e = Experience.query.filter_by(id=id).first()
+            return make_response(e.to_dict(), 200)
+        except:
+            return ('Error retrieving this experience', 404)
+        
+    def delete(self, id):
+        try:
+            e = Experience.query.filter_by(id=id).first()
+            db.session.delete(e)
+            db.session.commit()
+            return make_response('', 204)
+        except:
+            return ('Experience not found', 404)
+        
+api.add_resource(ExperienceID, '/experiences/<int:id>')
+
+
 
 if __name__ == "__main__":
   app.run(port=5555, debug=True)
