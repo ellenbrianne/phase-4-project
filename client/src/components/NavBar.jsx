@@ -18,10 +18,10 @@ function NavBar ({ delUser }) {
     return (
         <>
         <Header>Welcome to Your Next Move!</Header>
+          <Button onClick={handleDelUser}>Logout</Button>
           <Tabs>
             <Link to="/">Home</Link>
             <Link to="/experiences">All Experiences</Link>
-            <Button onClick={handleDelUser}>Logout</Button>
           </Tabs>
         </>
         
@@ -37,18 +37,18 @@ const Tabs = styled.div`
     justify-content: space-evenly;
     width: 25%;
     a{
-    color:white;
+    color:black;
     font-family:Arial;
     font-size: large;
-    border: 2px solid black;
-    background-color: black;
-    }
-    a:hover{
-      color: grey;
+    font-weight: 550;
+    border-radius: 6px;
+    padding: 0.5em 1.2em;
+    background-color: pink;
     }
 `;
 
 const Button = styled.button`
+    float: right;
     border-radius: 6px;
     border: 1px solid transparent;
     padding: 0.6em 1.2em;
