@@ -11,7 +11,7 @@ function Home ({ exp, currUser }) {
 
     return (
         <>
-            <h3>My Experiences</h3>
+            <Header2>My Experiences:</Header2>
             {expDisplay}
             <AddLink>
                 <Link to="/experiences/new">Add a new Experience</Link>
@@ -31,11 +31,16 @@ const AddLink = styled.div`
     width: 15%;
     a{
     color:black;
-    font-family:Arial;
+    font-family: arial;
     font-size: medium;
     font-weight: 420;
     border-radius: 6px;
     padding: 0.3em 0.9em;
     background-color: pink;
     }
+`;
+
+const Header2 = styled.h2`
+    padding-top: 50px;
+    font-family: arial;
 `;
