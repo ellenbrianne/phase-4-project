@@ -106,8 +106,12 @@ class ExperienceID(Resource):
         try:
             exp = Experience.query.filter_by(id=id).first()
     
-            for attr in request.form:
-                setattr(exp, attr, request.form[attr])
+            for attr in request.get_json():
+                setattr(exp, attr, request.get_json()[attr])
+
+            exp.community = int(request.get_json()['community'])
+            exp.crowds = int(request.get_json()['crowds'])
+            exp.safety = int(request.get_json()['safety'])
 
             db.session.add(exp)
             db.session.commit()

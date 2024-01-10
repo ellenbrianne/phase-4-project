@@ -44,6 +44,18 @@ function App() {
     )))
   }
 
+  function updateExp (e) {
+    const newList = exp.map(oldExp => {
+      if (e.id === oldExp.id) {
+        return e;
+      } else {
+        return oldExp;
+      }
+    });
+
+    setExp(newList);
+  }
+
   const addUser = (u) => setUser(u)
   // change this to context to avoid drilling through AuthPage?
 
@@ -59,7 +71,7 @@ function App() {
       <Navbar delUser={setUser}/>
       <Routes>
         <Route path="/experiences/new" element={<ExpForm addExp={addExp} user={user}/>} />
-        <Route path="/experiences/:id/edit" element={<EditForm />} />
+        <Route path="/experiences/:id/edit" element={<EditForm currUser={user} updateExp={updateExp}/>} />
         <Route path="/experiences/:id" element={<ExpID currUser={user} delExp={delExp}/>} />
         <Route path="/experiences" element={<ExpContainer experiences={exp}/>} />
         <Route exact path='/' element={<Home exp={exp} currUser={user}/>} />

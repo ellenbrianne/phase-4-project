@@ -1,30 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 
-function EditForm () {
+function EditForm ({ currUser, updateExp }) {
     const params = useParams()
-
-    const [edit, setEdit] = useState({
-        id:'',
-        length:'',
-        location: {
-            city:'',
-            state:''
-        },
-        community:'',
-        crowds:'',
-        safety:'',
-        user_id:'',
-        location_id:''
-    })
-    
-    useEffect(() => {
-        fetch(`/api/experiences/${params.id}`)
-        .then(r => r.json())
-        .then(e => setEdit(e))     
-    },[])
 
     const formSchema = yup.object().shape({
         city: yup.string().required(),
@@ -37,7 +17,15 @@ function EditForm () {
 
     const formik = useFormik({
 
-        initialValues: edit,
+        initialValues: {
+            city:'',
+            state:'',
+            length:'',
+            community:'',
+            crowds:'',
+            safety:'',
+            user_id: currUser.id
+          },
 
         validationSchema: formSchema,
 
@@ -46,12 +34,16 @@ function EditForm () {
               method: "PATCH",
               headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json"
               },
               body: JSON.stringify(values),
             })
             .then(r => {
               if(r.ok){
-                nav('/')
+                r.json().then(e => {
+                    updateExp(e)
+                    nav('/')
+                })
               } else {
                 // r.json().then(error => setError(error.message))
                 null
@@ -61,8 +53,32 @@ function EditForm () {
       })
 
     return (
-        <form>
-
+        <form onSubmit={formik.handleSubmit}>
+            <label>
+                City
+            </label>
+            <input type='text' name='city' value={formik.values.city} onChange={formik.handleChange} />
+            <label>
+              State
+            </label>
+            <input type='text' name='state' value={formik.values.state} onChange={formik.handleChange} />
+            <label>
+                Duration of Experience
+            </label>
+              <input type='text' name='length' value={formik.values.length} onChange={formik.handleChange} />
+            <label>
+                Community
+            </label>
+            <input type='number' name='community' value={formik.values.community} min={1} max={5} onChange={formik.handleChange} />
+            <label>
+                Crowds
+            </label>
+            <input type='number' name='crowds' value={formik.values.crowds} min={1} max={5} onChange={formik.handleChange} />
+            <label>
+                Safety
+            </label>
+            <input type='number' name='safety' value={formik.values.safety} min={1} max={5} onChange={formik.handleChange} />
+            <input type='submit' value={'Finish Editing Experience'} />
         </form>
     )
 }
