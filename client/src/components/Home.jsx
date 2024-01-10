@@ -10,7 +10,6 @@ function Home ({ exp, currUser }) {
 
     return (
         <>
-            <h1>Welcome to Your Next Move!</h1>
             <h3>My Experiences</h3>
             {expDisplay}
             <Link to="/experiences/new">Add a new Experience</Link>

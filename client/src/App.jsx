@@ -1,3 +1,4 @@
+import { createGlobalStyle } from 'styled-components'
 import React, { useState, useEffect } from 'react'
 import Navbar from './components/NavBar'
 import AuthPage from './components/AuthPage'
@@ -61,6 +62,7 @@ function App() {
 
   if (!user) return (
     <>
+      <GlobalStyle />
       <h1>Signup or Login to see Your Next Move!</h1>
       <AuthPage addUser={addUser}/>
     </>
@@ -68,16 +70,40 @@ function App() {
 
   return (
     <>
+      <GlobalStyle />
       <Navbar delUser={setUser}/>
       <Routes>
-        <Route path="/experiences/new" element={<ExpForm addExp={addExp} user={user}/>} />
-        <Route path="/experiences/:id/edit" element={<EditForm currUser={user} updateExp={updateExp}/>} />
-        <Route path="/experiences/:id" element={<ExpID currUser={user} delExp={delExp}/>} />
-        <Route path="/experiences" element={<ExpContainer experiences={exp}/>} />
-        <Route exact path='/' element={<Home exp={exp} currUser={user}/>} />
+        <Route 
+          path="/experiences/new" 
+          element={<ExpForm addExp={addExp} user={user}/>} 
+        />
+        <Route 
+          path="/experiences/:id/edit" 
+          element={<EditForm currUser={user} updateExp={updateExp}/>} 
+        />
+        <Route 
+          path="/experiences/:id" 
+          element={<ExpID currUser={user} delExp={delExp}/>} 
+        />
+        <Route 
+          path="/experiences" 
+          element={<ExpContainer experiences={exp}/>} 
+        />
+        <Route 
+          exact path='/' 
+          element={<Home exp={exp} currUser={user}/>} 
+        />
       </Routes>
     </>
   )
 }
 
 export default App
+
+
+const GlobalStyle = createGlobalStyle`
+    body{
+      background-color: black; 
+      color:white;
+    }
+    ` 
