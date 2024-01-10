@@ -1,3 +1,4 @@
+import styled from 'styled-components'
 import React from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
@@ -45,7 +46,7 @@ function SignupForm ({ addUser }) {
         },
       })
     return (
-        <form onSubmit={formik.handleSubmit}>
+        <Form onSubmit={formik.handleSubmit}>
             <label>
                 Username
             </label>
@@ -63,8 +64,26 @@ function SignupForm ({ addUser }) {
             </label>
             <input type='password' name='password' value={formik.values.password} onChange={formik.handleChange} />
             <input type='submit' value={'Sign me up'} />
-        </form>
+        </Form>
     )
 }
 
 export default SignupForm
+
+const Form = styled.form`
+  display: flex;
+  flex-direction:column;
+  width: 300px;
+  margin:auto;
+  font-family:arial;
+  font-size:20px;
+  input[type=submit]{
+    background-color:pink;
+    color: black;
+    height:40px;
+    font-family:Arial;
+    font-size:30px;
+    margin-top:10px;
+    margin-bottom:10px;
+  }
+`;
