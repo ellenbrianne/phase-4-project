@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle, styled } from 'styled-components'
 import React, { useState, useEffect } from 'react'
 import Navbar from './components/NavBar'
 import AuthPage from './components/AuthPage'
@@ -63,7 +63,8 @@ function App() {
   if (!user) return (
     <>
       <GlobalStyle />
-      <h1>Signup or Login to see Your Next Move!</h1>
+      <Header>Welcome to Your Next Move!</Header>
+      <Prompt>Signup or Login to see Your Next Move...</Prompt>
       <AuthPage addUser={addUser}/>
     </>
   )
@@ -93,6 +94,10 @@ function App() {
           exact path='/' 
           element={<Home exp={exp} currUser={user}/>} 
         />
+        <Route
+          path='/auth'
+          element={<AuthPage />}
+        />
       </Routes>
     </>
   )
@@ -107,3 +112,14 @@ const GlobalStyle = createGlobalStyle`
       color:white;
     }
     ` 
+
+const Header = styled.h1`
+  font-size: 350%;
+  font-family: arial;
+  color: white;
+`;
+
+const Prompt = styled.h2`
+    padding-bottom: 50px;
+    color: red;
+`;

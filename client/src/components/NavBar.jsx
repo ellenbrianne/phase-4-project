@@ -1,16 +1,19 @@
 import styled from 'styled-components'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function NavBar ({ delUser }) {
+
+    const nav = useNavigate()
 
     function handleDelUser () {
         fetch('/api/logout', { method: 'DELETE' }).then(r => {
             if(r.ok){
                 delUser(null)
+                nav('/auth')
             } else {
                 null
-                // nav to authpauge
+                // errors
             }
         })
     };
