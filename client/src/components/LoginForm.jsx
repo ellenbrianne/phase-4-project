@@ -2,10 +2,10 @@ import styled from 'styled-components'
 import React from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function LoginForm ({ addUser }) {
-    // const nav = useNavigate()
+    const nav = useNavigate()
 
     const formSchema = yup.object().shape({
         username: yup.string().required()
@@ -32,7 +32,7 @@ function LoginForm ({ addUser }) {
               if(r.ok){
                 r.json().then(user => {
                   addUser(user)
-                  // add in nav(/) when you add Routes for landing page
+                  nav('/')
                 })
               } else {
                 // r.json().then(error => setError(error.message))
