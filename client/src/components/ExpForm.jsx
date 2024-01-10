@@ -42,7 +42,7 @@ function ExpForm ({ addExp, user }) {
               if(r.ok){
                 r.json().then(exp => {
                   addExp(exp)
-                  //nav to /home for myexperiences
+                  nav('/')
                 })
               } else {
                 // r.json().then(error => setError(error.message))
