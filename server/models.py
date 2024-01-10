@@ -2,6 +2,7 @@ from config import db, bcrypt
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy.orm import validates
 
 class User(db.Model, SerializerMixin):
     __tablename__ = "users"
@@ -26,7 +27,7 @@ class User(db.Model, SerializerMixin):
 
     serialize_rules = ('-experiences.user', )
 
-    experiences = db.relationship('Experience', back_populates='user')
+    experiences = db.relationship('Experience', back_populates='user', cascade='all, delete-orphan')
 
     locations = association_proxy('experiences', 'location', creator=lambda location_obj: Experience(location=location_obj))
 
@@ -39,7 +40,7 @@ class Location(db.Model, SerializerMixin):
 
     serialize_rules = ('-experiences.location', )
 
-    experiences = db.relationship('Experience', back_populates='location')
+    experiences = db.relationship('Experience', back_populates='location', cascade='all, delete-orphan')
 
 
 class Experience(db.Model, SerializerMixin):
@@ -58,3 +59,10 @@ class Experience(db.Model, SerializerMixin):
 
     location = db.relationship('Location', back_populates='experiences')
     user = db.relationship('User', back_populates='experiences')
+
+    @validates('community', 'crowds', 'safety')
+    def validate_value(self, key, value):
+        if int(value) > 5:
+            raise ValueError('Rate on a scale of 1-5')
+        else:
+            return value

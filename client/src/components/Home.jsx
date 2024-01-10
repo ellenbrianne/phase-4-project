@@ -1,3 +1,4 @@
+import styled from 'styled-components'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import ExpCard from './ExpCard'
@@ -12,10 +13,29 @@ function Home ({ exp, currUser }) {
         <>
             <h3>My Experiences</h3>
             {expDisplay}
-            <Link to="/experiences/new">Add a new Experience</Link>
+            <AddLink>
+                <Link to="/experiences/new">Add a new Experience</Link>
+            </AddLink>
         </>
 
     )
 }
 
 export default Home;
+
+const AddLink = styled.div`
+    display: left;
+    align-items: center;
+    padding-top: 50px;
+    justify-content: space-evenly;
+    width: 15%;
+    a{
+    color:black;
+    font-family:Arial;
+    font-size: medium;
+    font-weight: 420;
+    border-radius: 6px;
+    padding: 0.3em 0.9em;
+    background-color: pink;
+    }
+`;
