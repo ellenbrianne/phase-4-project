@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 
 function ExpID ({ currUser, delExp }) {
     const [access, setAccess] = useState(false)
@@ -40,10 +40,6 @@ function ExpID ({ currUser, delExp }) {
         })
     },[])
 
-    function handleEdit() {
-        null
-    }
-
     function handleDelete() {
         fetch(`/api/experiences/${id}`, { 
             method: "DELETE" 
@@ -62,7 +58,7 @@ function ExpID ({ currUser, delExp }) {
         <div id={id}>
             {access&& (
                 <>
-                    <button onClick={handleEdit}>Edit</button>
+                    <Link to={`/experiences/${id}/edit`}>Edit</Link>
                     <button onClick={handleDelete}>Delete</button>
                 </>
             )}

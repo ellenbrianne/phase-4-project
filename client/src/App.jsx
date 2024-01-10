@@ -6,7 +6,7 @@ import ExpContainer from './components/ExpContainer'
 import Home from './components/Home'
 import ExpForm from './components/ExpForm'
 import ExpID from './components/ExpID'
-
+import EditForm from './components/EditForm'
 
 function App() {
   const [user, setUser] = useState(null)
@@ -59,6 +59,7 @@ function App() {
       <Navbar delUser={setUser}/>
       <Routes>
         <Route path="/experiences/new" element={<ExpForm addExp={addExp} user={user}/>} />
+        <Route path="/experiences/:id/edit" element={<EditForm />} />
         <Route path="/experiences/:id" element={<ExpID currUser={user} delExp={delExp}/>} />
         <Route path="/experiences" element={<ExpContainer experiences={exp}/>} />
         <Route exact path='/' element={<Home exp={exp} currUser={user}/>} />

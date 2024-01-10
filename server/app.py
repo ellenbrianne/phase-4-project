@@ -102,6 +102,20 @@ class ExperienceID(Resource):
         except:
             return ('Experience not found', 404)
         
+    def patch(self, id):
+        try:
+            exp = Experience.query.filter_by(id=id).first()
+    
+            for attr in request.form:
+                setattr(exp, attr, request.form[attr])
+
+            db.session.add(exp)
+            db.session.commit()
+
+            return make_response(exp.to_dict(), 200)
+        except:
+            return ('Invalid form input', 422)
+        
 api.add_resource(ExperienceID, '/experiences/<int:id>')
 
 
