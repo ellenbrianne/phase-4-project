@@ -3,7 +3,7 @@ import React from 'react'
 function ExpCard ({ experience }) {
     const { id, length, community, crowds, safety, location, user } = experience
     //put link in here to individual /experiences/<:id> route eventually
-
+   
     return (
         <div id={id}>
             <p>Location: {location.city}, {location.state}</p>

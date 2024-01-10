@@ -1,9 +1,11 @@
 import React from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
+import { useNavigate } from 'react-router-dom'
 
 function ExpForm ({ addExp, user }) {
-    //city, state, length, community, crowds, safety, u_id, location_id
+
+    const nav = useNavigate()
 
     const formSchema = yup.object().shape({
         city: yup.string().required(),
@@ -40,7 +42,7 @@ function ExpForm ({ addExp, user }) {
               if(r.ok){
                 r.json().then(exp => {
                   addExp(exp)
-                  // add in nav(/) when you add Routes for landing page
+                  //nav to /home for myexperiences
                 })
               } else {
                 // r.json().then(error => setError(error.message))

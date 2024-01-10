@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom'
 import ExpContainer from './components/ExpContainer'
 import Home from './components/Home'
 import ExpForm from './components/ExpForm'
+import ExpInd from './components/ExpInd'
 
 
 function App() {
@@ -52,8 +53,9 @@ function App() {
       <Navbar delUser={setUser}/>
       <Routes>
         <Route path="/experiences/new" element={<ExpForm addExp={addExp} user={user}/>} />
+        <Route path="/experiences/:id" element={<ExpInd />} />
         <Route path="/experiences" element={<ExpContainer experiences={exp}/>} />
-        <Route exact path='/' element={<Home />} />
+        <Route exact path='/' element={<Home exp={exp} currUser={user}/>} />
       </Routes>
     </>
   )
