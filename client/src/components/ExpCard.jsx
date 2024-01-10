@@ -38,4 +38,5 @@ const Container = styled.div`
     padding-bottom: 50px;
     float: left;
     padding-right: 50px;
+    padding-top: 70px;
 `;
