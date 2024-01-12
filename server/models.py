@@ -27,7 +27,7 @@ class User(db.Model, SerializerMixin):
 
     serialize_rules = ('-experiences.user', )
 
-    experiences = db.relationship('Experience', back_populates='user', cascade='all, delete-orphan')
+    experiences = db.relationship('Experience', back_populates='user')
 
     locations = association_proxy('experiences', 'location', creator=lambda location_obj: Experience(location=location_obj))
 
@@ -40,7 +40,7 @@ class Location(db.Model, SerializerMixin):
 
     serialize_rules = ('-experiences.location', )
 
-    experiences = db.relationship('Experience', back_populates='location', cascade='all, delete-orphan')
+    experiences = db.relationship('Experience', back_populates='location')
 
 
 class Experience(db.Model, SerializerMixin):

@@ -80,7 +80,7 @@ function App() {
         />
         <Route 
           path="/experiences/:id/edit" 
-          element={<EditForm currUser={user} updateExp={updateExp}/>} 
+          element={<EditForm updateExp={updateExp} exp={exp}/>} 
         />
         <Route 
           path="/experiences/:id" 

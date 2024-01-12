@@ -1,10 +1,13 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 
-function EditForm ({ currUser, updateExp }) {
+function EditForm ({ updateExp, exp }) {
     const params = useParams()
+    const nav = useNavigate()
+
+    const expObj = exp.find(e => e.id == params.id)
 
     const formSchema = yup.object().shape({
         city: yup.string().required(),
@@ -18,14 +21,11 @@ function EditForm ({ currUser, updateExp }) {
     const formik = useFormik({
 
         initialValues: {
-            city:'',
-            state:'',
-            length:'',
-            community:'',
-            crowds:'',
-            safety:'',
-            user_id: currUser.id
-          },
+            length: expObj.length,
+            community: expObj.community,
+            crowds: expObj.crowds,
+            safety: expObj.safety
+        },
 
         validationSchema: formSchema,
 
@@ -55,14 +55,6 @@ function EditForm ({ currUser, updateExp }) {
     return (
         <form onSubmit={formik.handleSubmit}>
             <label>
-                City
-            </label>
-            <input type='text' name='city' value={formik.values.city} onChange={formik.handleChange} />
-            <label>
-              State
-            </label>
-            <input type='text' name='state' value={formik.values.state} onChange={formik.handleChange} />
-            <label>
                 Duration of Experience
             </label>
               <input type='text' name='length' value={formik.values.length} onChange={formik.handleChange} />
@@ -78,7 +70,7 @@ function EditForm ({ currUser, updateExp }) {
                 Safety
             </label>
             <input type='number' name='safety' value={formik.values.safety} min={1} max={5} onChange={formik.handleChange} />
-            <input type='submit' value={'Finish Editing Experience'} />
+            <input type='submit' value={'Finish Editing'} />
         </form>
     )
 }
