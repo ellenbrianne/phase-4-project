@@ -1,11 +1,12 @@
 import styled from 'styled-components'
-import React from 'react'
+import React, { useState } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
 
 function SignupForm ({ addUser }) {
     const nav = useNavigate()
+    const [errors, setErrors] = useState([])
 
     const formSchema = yup.object().shape({
         username: yup.string().required(),
@@ -39,22 +40,25 @@ function SignupForm ({ addUser }) {
                   nav('/')
                 })
               } else {
-                // r.json().then(error => setError(error.message))
-                null
+                r.json().then(error => setErrors(error.message))
               }
             })   
         },
       })
     return (
         <Form onSubmit={formik.handleSubmit}>
+            {errors&& <h3 style={{color:'red'}}>{errors}</h3>}
+            <p style={{color:'red'}}> {formik.errors.username}</p>
             <label>
                 Username
             </label>
             <input type='text' name='username' value={formik.values.username} onChange={formik.handleChange} />
+            <p style={{color:'red'}}> {formik.errors.email}</p>
             <label>
               Email
             </label>
             <input type='text' name='email' value={formik.values.email} onChange={formik.handleChange} />
+            <p style={{color:'red'}}> {formik.errors.age}</p>
             <label>
                 Age
             </label>

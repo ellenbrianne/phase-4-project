@@ -43,8 +43,8 @@ function LoginForm ({ addUser }) {
       })
     return (
         <Form onSubmit={formik.handleSubmit}>
-            <h2 style={{color:'red'}}> {formik.errors.username}</h2>
-            {errors&& <p style={{color:'red'}}>{errors}</p>}
+            <h3 style={{color:'red'}}> {formik.errors.username}</h3>
+            {errors&& <h3 style={{color:'red'}}>{errors}</h3>}
             <label>
                 Username
             </label>

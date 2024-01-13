@@ -8,7 +8,7 @@ class User(db.Model, SerializerMixin):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String)
+    username = db.Column(db.String, unique=True)
     email = db.Column(db.String)
     age = db.Column(db.Integer)
     _password_hash = db.Column(db.String)
@@ -35,13 +35,19 @@ class Location(db.Model, SerializerMixin):
     __tablename__ = "locations"
 
     id = db.Column(db.Integer, primary_key=True)
-    city = db.Column(db.String)
-    state = db.Column(db.String)
+    city = db.Column(db.String, nullable=False)
+    state = db.Column(db.String, nullable=False)
 
     serialize_rules = ('-experiences.location', )
 
     experiences = db.relationship('Experience', back_populates='location')
 
+    @validates('city', 'state')
+    def validate_value(self, key, value):
+        if value == '':
+            raise ValueError(f'{value} cannot be blank')
+        else:
+            return value
 
 class Experience(db.Model, SerializerMixin):
     __tablename__ = "experiences"
