@@ -1,11 +1,12 @@
 import styled from 'styled-components'
-import React from 'react'
+import React, { useState } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
 
 function LoginForm ({ addUser }) {
     const nav = useNavigate()
+    const [errors, setErrors] = useState([])
 
     const formSchema = yup.object().shape({
         username: yup.string().required()
@@ -35,14 +36,15 @@ function LoginForm ({ addUser }) {
                   nav('/')
                 })
               } else {
-                // r.json().then(error => setError(error.message))
-                null
+                r.json().then(error => setErrors(error.message))
               }
             })   
         },
       })
     return (
         <Form onSubmit={formik.handleSubmit}>
+            <h2 style={{color:'red'}}> {formik.errors.username}</h2>
+            {errors&& <p style={{color:'red'}}>{errors}</p>}
             <label>
                 Username
             </label>
@@ -65,6 +67,16 @@ const Form = styled.form`
   margin:auto;
   font-family:arial;
   font-size:20px;
+  input[type=text]{
+    margin-bottom: 10px;
+    padding-bottom: 1px;
+    font-size: 100%;
+    font-family: arial;
+  }
+  input[type=password]{
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
   input[type=submit]{
     background-color:pink;
     color: black;
