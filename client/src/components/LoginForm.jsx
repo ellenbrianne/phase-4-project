@@ -20,6 +20,8 @@ function LoginForm ({ addUser }) {
         },
 
         validationSchema: formSchema,
+        validateOnBlur: false,
+        validateOnChange: false,
 
         onSubmit: (values) => {
             fetch('/api/login', {
@@ -36,15 +38,15 @@ function LoginForm ({ addUser }) {
                   nav('/')
                 })
               } else {
-                r.json().then(error => setErrors(error.message))
+                r.json().then(error => setErrors(error))
               }
             })   
         },
       })
     return (
         <Form onSubmit={formik.handleSubmit}>
-            <h3 style={{color:'red'}}> {formik.errors.username}</h3>
             {errors&& <h3 style={{color:'red'}}>{errors}</h3>}
+            <h3 style={{color:'red'}}> {formik.errors.username}</h3>
             <label>
                 Username
             </label>

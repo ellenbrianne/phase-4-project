@@ -42,7 +42,7 @@ function SignupForm ({ addUser }) {
                   nav('/')
                 })
               } else {
-                r.json().then(error => setErrors(error.message))
+                r.json().then(error => setErrors(error))
               }
             })   
         },
