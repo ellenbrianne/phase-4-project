@@ -1,3 +1,4 @@
+import styled from 'styled-components'
 import React from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'
@@ -53,7 +54,7 @@ function EditForm ({ updateExp, exp }) {
       })
 
     return (
-        <form onSubmit={formik.handleSubmit}>
+        <Form onSubmit={formik.handleSubmit}>
             <label>
                 Time spent there:
             </label>
@@ -71,8 +72,36 @@ function EditForm ({ updateExp, exp }) {
             </label>
             <input type='number' name='safety' value={formik.values.safety} min={1} max={5} onChange={formik.handleChange} />
             <input type='submit' value={'Finish Editing'} />
-        </form>
+        </Form>
     )
 }
 
 export default EditForm
+
+const Form = styled.form`
+  font-size: 115%;
+  display: flex;
+  width: 10%;
+  flex-direction: column;
+  padding: 100px;
+  margin: auto;
+  input[type=text]{
+    font-family: arial;
+    font-size: 100%;
+    padding: 10px;
+    margin: 10px;
+  }
+  input[type=number]{
+    font-family: arial;
+    padding: 5px;
+    margin: 5px;
+    font-size: 100%;
+  }
+  input[type=submit]{
+    font-family: arial;
+    padding: 10px;
+    margin: 10px;
+    font-size: 100%;
+    background-color: pink;
+  }
+`;
