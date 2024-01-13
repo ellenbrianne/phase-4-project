@@ -8,10 +8,9 @@ function ExpCard ({ experience }) {
     return (
         <Container id={id}>
             <Card>
-                <Link to={`/experiences/${id}`}>
-                    <p>Location: {location.city}, {location.state}</p>
-                    <p>Duration of experience: {length}</p>
-                </Link>
+                <Link to={`/experiences/${id}`}>More</Link>
+                  <h3>Location: {location.city}, {location.state}</h3>
+                  <h4>Time spent there: {length}</h4>
             </Card>
         </Container>
     )
@@ -21,14 +20,17 @@ export default ExpCard
 
 const Card = styled.div`
     grid-template-rows: max-content 150px 1fr;
-    border-radius: 5px white;
-    border: 2px solid pink;
-    display: flex;
+    border-radius: 5px;
+    border: 5px solid pink;
+    display: center;
     padding: 0.6em 1.2em;
     a{
-      color: white;
+      color: pink;
       font-family: arial;
+      font-size: 100%;
     }
+    font-family: arial;
+    font-size: 120%;
 `;
 
 const Container = styled.div`
@@ -37,6 +39,6 @@ const Container = styled.div`
     grid-gap: 10px;
     padding-bottom: 50px;
     float: left;
-    padding-right: 50px;
+    padding-right: 70px;
     padding-top: 70px;
 `;

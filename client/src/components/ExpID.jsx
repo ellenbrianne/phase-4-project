@@ -80,15 +80,17 @@ function ExpID ({ currUser, delExp }) {
 export default ExpID
 
 const Card = styled.div`
-  border-radius: 5px white;
-  border: 2px solid pink;
+  border-radius: 5px;
+  border: 5px solid pink;
   display: center;
-  max-width: 20%;
+  max-width: 25%;
   padding: 0.6em 1.2em;
   a{
     color: white;
     font-family: arial;
   }
+  font-family: arial;
+  font-size: 110%;
 `;
 
 const Border = styled.div`
