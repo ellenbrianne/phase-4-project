@@ -65,7 +65,7 @@ function ExpID ({ currUser, delExp }) {
               </>
             )}
             <h3>Location: {location.city}, {location.state}</h3>
-            <p>Duration of experience: {length}</p>
+            <p>Time spent there: {length}</p>
             <ul>
               <li>Community: {community}/5</li>
               <li>Crowds: {crowds}/5</li>

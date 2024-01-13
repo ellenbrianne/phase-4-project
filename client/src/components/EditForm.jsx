@@ -55,19 +55,19 @@ function EditForm ({ updateExp, exp }) {
     return (
         <form onSubmit={formik.handleSubmit}>
             <label>
-                Duration of Experience
+                Time spent there:
             </label>
               <input type='text' name='length' value={formik.values.length} onChange={formik.handleChange} />
             <label>
-                Community
+                Community:
             </label>
             <input type='number' name='community' value={formik.values.community} min={1} max={5} onChange={formik.handleChange} />
             <label>
-                Crowds
+                Crowds:
             </label>
             <input type='number' name='crowds' value={formik.values.crowds} min={1} max={5} onChange={formik.handleChange} />
             <label>
-                Safety
+                Safety:
             </label>
             <input type='number' name='safety' value={formik.values.safety} min={1} max={5} onChange={formik.handleChange} />
             <input type='submit' value={'Finish Editing'} />

@@ -1,3 +1,4 @@
+import styled from 'styled-components'
 import React from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
@@ -54,35 +55,63 @@ function ExpForm ({ addExp, user }) {
 
     return (
         <>
-            <form onSubmit={formik.handleSubmit}>
+            <Form onSubmit={formik.handleSubmit}>
             <label>
-                City
+                City:
             </label>
             <input type='text' name='city' value={formik.values.city} onChange={formik.handleChange} />
             <label>
-              State
+              State:
             </label>
             <input type='text' name='state' value={formik.values.state} onChange={formik.handleChange} />
             <label>
-                Duration of Experience
+                Time spent there:
             </label>
               <input type='text' name='length' value={formik.values.length} onChange={formik.handleChange} />
             <label>
-                Community
+                Community:
             </label>
             <input type='number' name='community' value={formik.values.community} min={1} max={5} onChange={formik.handleChange} />
             <label>
-                Crowds
+                Crowds:
             </label>
             <input type='number' name='crowds' value={formik.values.crowds} min={1} max={5} onChange={formik.handleChange} />
             <label>
-                Safety
+                Safety:
             </label>
             <input type='number' name='safety' value={formik.values.safety} min={1} max={5} onChange={formik.handleChange} />
             <input type='submit' value={'Add Experience'} />
-        </form>
+        </Form>
         </>
     )
 }
 
 export default ExpForm;
+
+const Form = styled.form`
+  font-size: 115%;
+  display: flex;
+  width: 10%;
+  flex-direction: column;
+  padding: 100px;
+  margin: auto;
+  input[type=text]{
+    font-family: arial;
+    font-size: 100%;
+    padding: 10px;
+    margin: 10px;
+  }
+  input[type=number]{
+    font-family: arial;
+    padding: 5px;
+    margin: 5px;
+    font-size: 100%;
+  }
+  input[type=submit]{
+    font-family: arial;
+    padding: 10px;
+    margin: 10px;
+    font-size: 100%;
+    background-color: pink;
+  }
+`;
