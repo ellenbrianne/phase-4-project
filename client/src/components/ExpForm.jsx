@@ -1,20 +1,20 @@
 import styled from 'styled-components'
-import React from 'react'
+import React, { useState } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
 
 function ExpForm ({ addExp, user }) {
-
+    const [errors, setErrors] = useState([])
     const nav = useNavigate()
 
     const formSchema = yup.object().shape({
         city: yup.string().required(),
         state: yup.string().required(),
-        length: yup.string().required(),
-        community: yup.number().positive().integer().lessThan(6),
-        crowds: yup.number().positive().integer().lessThan(6),
-        safety: yup.number().positive().integer().lessThan(6)
+        length: yup.string().required('time spent is a required field'),
+        community: yup.number().positive().integer().lessThan(6).required(),
+        crowds: yup.number().positive().integer().lessThan(6).required(),
+        safety: yup.number().positive().integer().lessThan(6).required()
     })
 
     const formik = useFormik({
@@ -30,6 +30,8 @@ function ExpForm ({ addExp, user }) {
         },
 
         validationSchema: formSchema,
+        validateOnBlur: false,
+        validateOnChange: false,
 
         onSubmit: (values) => {
             fetch('/api/experiences', {
@@ -46,8 +48,7 @@ function ExpForm ({ addExp, user }) {
                   nav('/')
                 })
               } else {
-                // r.json().then(error => setError(error.message))
-                null
+                r.json().then(error => setErrors(error))
               }
             })   
         },
@@ -56,26 +57,33 @@ function ExpForm ({ addExp, user }) {
     return (
         <>
             <Form onSubmit={formik.handleSubmit}>
+            {errors&& (<h3 style={{color:'red'}}>{errors}</h3>)}
+            <p style={{color:'red'}}> {formik.errors.city}</p>
             <label>
                 City:
             </label>
             <input type='text' name='city' value={formik.values.city} onChange={formik.handleChange} />
+            <p style={{color:'red'}}> {formik.errors.state}</p>
             <label>
               State:
             </label>
             <input type='text' name='state' value={formik.values.state} onChange={formik.handleChange} />
+            <p style={{color:'red'}}> {formik.errors.length}</p>
             <label>
                 Time spent there:
             </label>
               <input type='text' name='length' value={formik.values.length} onChange={formik.handleChange} />
+            <p style={{color:'red'}}> {formik.errors.community}</p>
             <label>
                 Community:
             </label>
             <input type='number' name='community' value={formik.values.community} min={1} max={5} onChange={formik.handleChange} />
+            <p style={{color:'red'}}> {formik.errors.crowds}</p>
             <label>
                 Crowds:
             </label>
             <input type='number' name='crowds' value={formik.values.crowds} min={1} max={5} onChange={formik.handleChange} />
+            <p style={{color:'red'}}> {formik.errors.safety}</p>
             <label>
                 Safety:
             </label>

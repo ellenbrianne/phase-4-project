@@ -24,6 +24,8 @@ function SignupForm ({ addUser }) {
         },
 
         validationSchema: formSchema,
+        validateOnBlur: false,
+        validateOnChange: false,
 
         onSubmit: (values) => {
             fetch('/api/signup', {
@@ -47,7 +49,9 @@ function SignupForm ({ addUser }) {
       })
     return (
         <Form onSubmit={formik.handleSubmit}>
-            {errors&& <h3 style={{color:'red'}}>{errors}</h3>}
+            {errors&& (
+              <h3 style={{color:'red'}}>{errors}</h3>
+            )}
             <p style={{color:'red'}}> {formik.errors.username}</p>
             <label>
                 Username
