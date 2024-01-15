@@ -1,7 +1,12 @@
 from config import app, db, api
 from flask_restful import Resource
-from flask import request, make_response, session
+from flask import request, make_response, session, render_template
 from models import User, Location, Experience
+
+@app.route('/')
+@app.route('/<int:id>')
+def index(ind=0):
+    return render_template("index.html")
 
 class Auth(Resource):
     def get(self):
