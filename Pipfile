@@ -12,6 +12,7 @@ flask-restful = "0.3.9"
 flask-migrate = "3.1.0"
 flask-bcrypt = "1.0.1"
 python-dotenv = "*"
+importlib-resources = "5.10.0"
 
 [dev-packages]
 
