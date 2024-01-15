@@ -11,9 +11,6 @@ function NavBar ({ delUser }) {
             if(r.ok){
                 delUser(null)
                 nav('/auth')
-            } else {
-                null
-                // errors
             }
         })
     };
