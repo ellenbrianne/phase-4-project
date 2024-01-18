@@ -3,10 +3,6 @@ from flask_restful import Resource
 from flask import request, make_response, session, render_template
 from models import User, Location, Experience
 
-@app.route('/')
-@app.route('/<int:id>')
-def index(ind=0):
-    return render_template("index.html")
 
 class Auth(Resource):
     def get(self):
@@ -126,6 +122,11 @@ class ExperienceID(Resource):
             return ('Invalid form input', 422)
         
 api.add_resource(ExperienceID, '/experiences/<int:id>')
+
+@app.route('/')
+@app.route('/<int:id>')
+def index(ind=0):
+    return render_template("index.html")
 
 
 

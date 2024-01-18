@@ -12,7 +12,9 @@ flask-restful = "*"
 flask-migrate = "*"
 flask-bcrypt = "*"
 gunicorn = "*"
+honcho = "*"
 python-dotenv = "*"
+honcho = "*"
 
 [dev-packages]
 
