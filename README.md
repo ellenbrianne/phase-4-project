@@ -30,7 +30,24 @@ Users can create their own profiles & review their experiences living in a parti
 - `EditForm.jsx` uses `formik` & `yup`, performs PATCH request to modify an existing user's experience using `useParams` and navigates back to Home.
 - Styled components is used for styling each individual component.
 2. Python & Flask-SQLAlchemy code exist in `server` folder.
-- 
+- `instance` folder contains the sqlite3 database, `app.db`.
+- `migrations` contains all of the db migrations so far.
+- `config.py` contains majority of the Flask imports.
+    - Flask `app`, Migrate, SQLAlchemy, CORS, Bcrypt, and Api initialization.
+- `seed.py` contains my db seed data.
+- `models.py` contains my 3 models which use `bcrypt` and `SerializerMixin`.
+    - User model contains constraints, a `hybrid_property _password_hash`, `serialize_rules`, relationship with Experience, and `association_proxy` with locations.
+    - Location model contains constraints & a validation, `serialize_rules`, and a relationship with Experience.
+    - Experience model acts as a join table.
+        - Contains user & location foreign keys.
+        - Also has validation, relationships with Location & User, & `serialize_rules`.
+- `app.py` contains all backend routes using `flask_restful`.
+    - `/auth` checks if there's a current `user_id` stored in `session` object.
+    - `/signup` creates a new User instance & `password_hash` & stores that `user_id` in `session` object.
+    - `/login` uses `authenticate` method from User model to check password & username in db & set `session[user_id]`.
+    - `/logout` removes `user_id` from `session` object if it's not already `null`.
+    - `/experiences` contains a `get` & a `post` method depending on the request which either retrieve all experience instances or create a new one.
+    - `/experiences/<int:id>` use a given `id` from frontend request to dynamically `get` one experience instance, `patch` an instance using `setattr`, or `delete` one instance.
 
 ## Usage
 - All users are initially brought to the authorization page which will prompt user login or provide an option to create an account.
