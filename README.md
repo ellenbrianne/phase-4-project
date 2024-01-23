@@ -9,6 +9,9 @@ Users can create their own profiles & review their experiences living in a parti
 4. Finally, run `honcho start -f Procfile.dev` to run front & backend servers; visit http://localhost:4000 to view the website.
 
 ## Code walkthrough
+1. React code exists in `client` folder.
+- BrowserRouter is used in App.jsx to provide client-side routing.
+
 
 
 ## Usage
