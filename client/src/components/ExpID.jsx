@@ -4,6 +4,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 
 function ExpID ({ currUser, delExp }) {
   const [access, setAccess] = useState(false)
+  const [errors, setErrors] = useState([])
   const [ind, setInd] = useState({
       id:'',
       length:'',
@@ -35,8 +36,7 @@ function ExpID ({ currUser, delExp }) {
             }
           })
         } else {
-            null 
-            // set errors eventually
+            r.json().then(error => setErrors(error))
           }
       })
     },[])
@@ -49,14 +49,14 @@ function ExpID ({ currUser, delExp }) {
             delExp(ind)
             nav('/')
         } else {
-            null
-            //errors
+            r.json().then(error => setErrors(error))
           }
       })
   }
 
     return (
         <Border id={id}>
+          {errors&& (<h3 style={{color:'red'}}>{errors}</h3>)}
           <Card>
             {access&& (
               <>
