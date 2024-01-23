@@ -10,9 +10,27 @@ Users can create their own profiles & review their experiences living in a parti
 
 ## Code walkthrough
 1. React code exists in `client` folder.
-- BrowserRouter is used in App.jsx to provide client-side routing.
-
-
+- `BrowserRouter` is used in `main.jsx` to provide client-side routing.
+- `App.jsx` contains state for the current user and all experiences, as well as `useEffect` to load these on initial render.
+    - All other components are rendered conditionally based on whether current user is `null`.
+- `AuthPage.jsx` renders `LoginForm.jsx` & `SignupForm.jsx`.
+- `LoginForm.jsx` & `SignupForm.jsx` both use `formik` & `yup` for inputs & display errors.
+    - Use `addUser` function after successful POST request to set `user` state in `App.jsx`.
+- `NavBar.jsx` provides `Link`s to Home & all Experiences, as well as contains the DELETE request for Logout functionality.
+- `Home.jsx` renders filtered list of `experiences` from state based on current user.
+    - Provides a `Link` to `ExpForm.jsx` to add a new experience.
+- `ExpForm.jsx` uses `yup` & `formik` for user input to create a new experience via POST request.
+    - Displays formik errors on submit and navigates user back to Home after successful creation.
+- `ExpContainer.jsx` renders all experiences using `ExpCard.jsx`.
+- `ExpCard.jsx` provides a preview with limited details for each experience, as well as a `Link` to 'more' details for each card.
+- `ExpID.jsx` uses `useParams` to render details of an individual experience.
+    - Based on current user, a `Link` to `EditForm.jsx` and a delete button are shown as well.
+    - Delete button performs DELETE request.
+    - `useEffect` is used with `params.id` to determine current user's access to modify & delete functionality.
+- `EditForm.jsx` uses `formik` & `yup`, performs PATCH request to modify an existing user's experience using `useParams` and navigates back to Home.
+- Styled components is used for styling each individual component.
+2. Python & Flask-SQLAlchemy code exist in `server` folder.
+- 
 
 ## Usage
 - All users are initially brought to the authorization page which will prompt user login or provide an option to create an account.
