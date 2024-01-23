@@ -57,7 +57,6 @@ class Experience(db.Model, SerializerMixin):
     community = db.Column(db.Integer)
     crowds = db.Column(db.Integer)
     safety = db.Column(db.Integer)
-    ## add constraints/validations so these are <= 5
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     location_id = db.Column(db.Integer, db.ForeignKey('locations.id'))
 

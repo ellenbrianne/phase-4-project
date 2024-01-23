@@ -12,7 +12,6 @@ import EditForm from './components/EditForm'
 function App() {
   const [user, setUser] = useState(null)
   const [exp, setExp] = useState([])
-  // might make exp context too?
 
   useEffect(() => {
     getUser()
@@ -58,7 +57,6 @@ function App() {
   }
 
   const addUser = (u) => setUser(u)
-  // change this to context to avoid drilling through AuthPage?
 
   if (!user) return (
     <>

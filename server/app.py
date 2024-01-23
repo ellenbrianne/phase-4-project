@@ -123,12 +123,11 @@ class ExperienceID(Resource):
         
 api.add_resource(ExperienceID, '/experiences/<int:id>')
 
-@app.route('/')
-@app.route('/<int:id>')
-def index(ind=0):
-    return render_template("index.html")
-
-
+# save for deployment
+# @app.route('/')
+# @app.route('/<int:id>')
+# def index(ind=0):
+#     return render_template("index.html")
 
 if __name__ == "__main__":
   app.run(port=5555, debug=True)
