@@ -12,9 +12,11 @@ function ExpID ({ currUser, delExp }) {
         city: '',
         state:''
       },
-      community:'',
-      crowds:'',
-      safety:'',
+      rating: {
+        community:'',
+        crowds:'',
+        safety:''
+      },
       user: {
         username:'',
         age:''
@@ -23,7 +25,7 @@ function ExpID ({ currUser, delExp }) {
   const params = useParams()
   const nav = useNavigate()
 
-  const { id, length, location, community, crowds, safety, user } = ind
+  const { id, length, location, rating, user } = ind
 
   useEffect(() => {
       fetch(`/api/experiences/${params.id}`)
@@ -67,9 +69,9 @@ function ExpID ({ currUser, delExp }) {
             <h3>Location: {location.city}, {location.state}</h3>
             <p>Time spent there: {length}</p>
             <ul>
-              <li>Community: {community}/5</li>
-              <li>Crowds: {crowds}/5</li>
-              <li>Safety: {safety}/5</li>
+              <li>Community: {rating.community}/5</li>
+              <li>Crowds: {rating.crowds}/5</li>
+              <li>Safety: {rating.safety}/5</li>
             </ul>
             <p>Username: {user.username}, Age: {user.age}</p>
           </Card>
