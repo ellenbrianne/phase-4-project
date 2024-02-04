@@ -22,9 +22,9 @@ function EditForm ({ updateExp, exp }) {
 
         initialValues: {
             length: expObj.length,
-            community: expObj.community,
-            crowds: expObj.crowds,
-            safety: expObj.safety
+            community: expObj.rating.community,
+            crowds: expObj.rating.crowds,
+            safety: expObj.rating.safety
         },
 
         validationSchema: formSchema,
