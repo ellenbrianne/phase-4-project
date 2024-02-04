@@ -54,20 +54,33 @@ class Experience(db.Model, SerializerMixin):
     
     id = db.Column(db.Integer, primary_key=True)
     length = db.Column(db.String)
-    community = db.Column(db.Integer)
-    crowds = db.Column(db.Integer)
-    safety = db.Column(db.Integer)
+    rating_id = db.Column(db.Integer, db.ForeignKey('ratings.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     location_id = db.Column(db.Integer, db.ForeignKey('locations.id'))
 
-    serialize_rules = ('-user.experiences', '-location.experiences')
+    serialize_rules = ('-user.experiences', '-location.experiences', '-rating.experiences')
 
     location = db.relationship('Location', back_populates='experiences')
     user = db.relationship('User', back_populates='experiences')
+    rating = db.relationship('Rating', back_populates='experiences')
 
+    
+        
+class Rating(db.Model, SerializerMixin):
+    __tablename__ = "ratings"
+
+    id = db.Column(db.Integer, primary_key=True)
+    community = db.Column(db.Integer)
+    crowds = db.Column(db.Integer)
+    safety = db.Column(db.Integer)
+    
     @validates('community', 'crowds', 'safety')
     def validate_value(self, key, value):
         if int(value) > 5:
             raise ValueError('Rate on a scale of 1-5')
         else:
             return value
+        
+    serialize_rules = ('-experiences.rating', )
+        
+    experiences = db.relationship('Experience', back_populates='rating')
