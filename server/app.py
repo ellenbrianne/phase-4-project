@@ -1,7 +1,7 @@
 from config import app, db, api
 from flask_restful import Resource
 from flask import request, make_response, session, render_template
-from models import User, Location, Experience
+from models import User, Location, Experience, Rating
 
 
 class Auth(Resource):
@@ -72,9 +72,13 @@ class Experiences(Resource):
             db.session.add(new_l)
             db.session.commit()
 
+            new_r = Rating(community=data['community'], crowds=data['crowds'],
+                        safety=data['safety'])
+            db.session.add(new_r)
+            db.session.commit()
+
             new_e = Experience(
-                        length=data['length'], community=data['community'], crowds=data['crowds'],
-                        safety=data['safety'], user_id=data['user_id'], location_id=new_l.id)
+                        length=data['length'], rating_id=new_r.id, user_id=data['user_id'], location_id=new_l.id)
         except:
             return ('Error creating new experience', 422)
         
