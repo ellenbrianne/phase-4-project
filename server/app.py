@@ -110,15 +110,13 @@ class ExperienceID(Resource):
     def patch(self, id):
         try:
             exp = Experience.query.filter_by(id=id).first()
+            rating = Rating.query.filter_by(id=exp.rating_id).first()
     
             for attr in request.get_json():
                 setattr(exp, attr, request.get_json()[attr])
+                setattr(rating, attr, request.get_json()[attr])
 
-            exp.community = int(request.get_json()['community'])
-            exp.crowds = int(request.get_json()['crowds'])
-            exp.safety = int(request.get_json()['safety'])
-
-            db.session.add(exp)
+            db.session.add_all([exp, rating])
             db.session.commit()
 
             return make_response(exp.to_dict(), 200)
