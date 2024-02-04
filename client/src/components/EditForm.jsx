@@ -44,7 +44,7 @@ function EditForm ({ updateExp, exp }) {
               if(r.ok){
                 r.json().then(e => {
                     updateExp(e)
-                    nav('/')
+                    nav(`/experiences/${params.id}`)
                 })
               } else {
                 r.json().then(error => setErrors(error))
