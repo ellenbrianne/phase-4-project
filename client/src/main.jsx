@@ -4,9 +4,12 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
+import userReducer from './src/slices/userSlice'
 
 const store = configureStore({
-  reducer: { }
+  reducer: { 
+    user: userReducer 
+  }
 })
 
 ReactDOM.createRoot(document.getElementById('root')).render(
