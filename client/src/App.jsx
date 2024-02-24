@@ -87,7 +87,7 @@ function App() {
         />
         <Route 
           path="/experiences/:id" 
-          element={<ExpID currUser={user} delExp={delExp}/>} 
+          element={<ExpID delExp={delExp}/>} 
         />
         <Route 
           path="/experiences" 
