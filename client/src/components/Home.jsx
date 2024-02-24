@@ -2,10 +2,13 @@ import styled from 'styled-components'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import ExpCard from './ExpCard'
+import { userSelector } from 'react-redux'
 
-function Home ({ exp, currUser }) {
+function Home ({ exp }) {
 
-    const expDisplay = exp.filter(e => e.user_id == currUser.id).map(e => (
+    const user = userSelector(state => state.user.value) 
+
+    const expDisplay = exp.filter(e => e.user_id == user.id).map(e => (
          <ExpCard key={e.id} experience={e} />
     ))
 

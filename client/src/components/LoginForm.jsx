@@ -3,10 +3,14 @@ import React, { useState } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { setUser } from '../slices/userSlice'
 
-function LoginForm ({ addUser }) {
+function LoginForm () {
     const nav = useNavigate()
     const [errors, setErrors] = useState([])
+
+    const dispatch = useDispatch()
 
     const formSchema = yup.object().shape({
         username: yup.string().required()
@@ -34,7 +38,7 @@ function LoginForm ({ addUser }) {
             .then(r => {
               if(r.ok){
                 r.json().then(user => {
-                  addUser(user)
+                  dispatch(setUser(user))
                   nav('/')
                 })
               } else {

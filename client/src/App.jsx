@@ -8,10 +8,17 @@ import Home from './components/Home'
 import ExpForm from './components/ExpForm'
 import ExpID from './components/ExpID'
 import EditForm from './components/EditForm'
+import { useDispatch } from 'react-redux'
+import { setUser } from './slices/userSlice'
+import { useSelector } from 'react-redux'
 
 function App() {
-  const [user, setUser] = useState(null)
+  // const [user, setUser] = useState(null)
+  // remove useState import once this is gone
   const [exp, setExp] = useState([])
+
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.user.value)
 
   useEffect(() => {
     getUser()
@@ -23,7 +30,7 @@ function App() {
     .then(r => {
       if(r.ok){
         r.json()
-        .then(userObj => setUser(userObj))
+        .then(userObj => dispatch(setUser(userObj)))
       } 
     })
   }
@@ -56,14 +63,12 @@ function App() {
     setExp(newList);
   }
 
-  const addUser = (u) => setUser(u)
-
   if (!user) return (
     <>
       <GlobalStyle />
       <Header>Welcome to Your Next Move!</Header>
       <Prompt>Signup or Login to see Your Next Move...</Prompt>
-      <AuthPage addUser={addUser}/>
+      <AuthPage/>
     </>
   )
 
@@ -90,7 +95,7 @@ function App() {
         />
         <Route 
           exact path='/' 
-          element={<Home exp={exp} currUser={user}/>} 
+          element={<Home exp={exp}/>} 
         />
         <Route
           path='/auth'

@@ -4,19 +4,19 @@ import LoginForm from './LoginForm'
 import SignupForm from './SignupForm'
 
 
-function AuthPage ({ addUser }) {
+function AuthPage () {
     const [signedUp, setSignedUp] = useState(true)
 
     return (
       <>
         {signedUp ? (
           <>
-            <LoginForm addUser={addUser} />
+            <LoginForm/>
             <Button onClick={() => setSignedUp(!signedUp)}>Need to create an account?</Button>
           </>
         ) : (
           <>
-            <SignupForm addUser={addUser} />
+            <SignupForm/>
             <Button onClick={() => setSignedUp(!signedUp)}>Back to Login</Button>
           </>
         )

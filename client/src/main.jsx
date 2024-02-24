@@ -4,7 +4,7 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
-import userReducer from './src/slices/userSlice'
+import userReducer from './slices/userSlice'
 
 const store = configureStore({
   reducer: { 
