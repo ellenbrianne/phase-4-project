@@ -79,7 +79,7 @@ function App() {
       <Routes>
         <Route 
           path="/experiences/new" 
-          element={<ExpForm addExp={addExp} user={user}/>} 
+          element={<ExpForm addExp={addExp}/>} 
         />
         <Route 
           path="/experiences/:id/edit" 

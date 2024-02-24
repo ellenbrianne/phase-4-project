@@ -3,10 +3,13 @@ import React, { useState } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
-function ExpForm ({ addExp, user }) {
+function ExpForm ({ addExp }) {
     const [errors, setErrors] = useState([])
     const nav = useNavigate()
+
+    const user = useSelector(state => state.user.value)
 
     const formSchema = yup.object().shape({
         city: yup.string().required(),
