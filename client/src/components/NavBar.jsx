@@ -1,15 +1,18 @@
 import styled from 'styled-components'
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { delUser } from '../slices/userSlice'
+import { useDispatch } from 'react-redux'
 
-function NavBar ({ delUser }) {
+function NavBar () {
 
     const nav = useNavigate()
+    const dispatch = useDispatch()
 
     function handleDelUser () {
         fetch('/api/logout', { method: 'DELETE' }).then(r => {
             if(r.ok){
-                delUser(null)
+                dispatch(delUser())
                 nav('/auth')
             }
         })
