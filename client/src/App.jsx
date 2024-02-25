@@ -11,6 +11,7 @@ import EditForm from './components/EditForm'
 import { useDispatch } from 'react-redux'
 import { setUser } from './slices/userSlice'
 import { useSelector } from 'react-redux'
+import { addExp } from './slices/expSlice'
 
 function App() {
   const dispatch = useDispatch()

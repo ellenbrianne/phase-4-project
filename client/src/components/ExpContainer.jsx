@@ -4,12 +4,11 @@ import { useSelector } from 'react-redux'
 
 function ExpContainer () {
 
-    const exp = useSelector(state => state.exp.value)
-
-    const expDisplay = exp.map(e => (
-        <ExpCard key ={e.id} experience={e} />
-    ))
+    const exp = useSelector(state => state.exp.arr)
     
+    const expDisplay = exp.map(e => (
+                <ExpCard key ={e.id} experience={e} />
+                ))   
     
     return (
         <>

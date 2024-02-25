@@ -3,11 +3,15 @@ import { createSlice } from '@reduxjs/toolkit';
 const expSlice = createSlice({
     name: "exp",
     initialState: {
-        value: []
+        arr: []
     },
     reducers: {
-        addExp: (state, action) => {
-            state.value = [...state.value, action.payload]
+        addExp: (arr, action) => {
+            return [
+                ...arr.slice(0, action.index),
+                action.item,
+                ...arr.slice(action.index)
+            ]
         },
         delExp: (state, action) => {
             state.value = state.value.filter(e => (

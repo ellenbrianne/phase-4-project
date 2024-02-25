@@ -2,8 +2,10 @@ import styled from 'styled-components'
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { delExp } from '../slices/expSlice'
 
-function ExpID ({ delExp }) {
+function ExpID () {
   const [access, setAccess] = useState(false)
   const [errors, setErrors] = useState([])
   const [ind, setInd] = useState({
@@ -26,6 +28,7 @@ function ExpID ({ delExp }) {
   const params = useParams()
   const nav = useNavigate()
   const currUser = useSelector(state => state.user.value)
+  const dispatch = useDispatch()
 
   const { id, length, location, rating, user } = ind
 
@@ -50,7 +53,7 @@ function ExpID ({ delExp }) {
       method: "DELETE" 
     }).then(r => {
         if (r.ok) {
-            delExp(ind)
+            dispatch(delExp(id))
             nav('/')
         } else {
             r.json().then(error => setErrors(error))
