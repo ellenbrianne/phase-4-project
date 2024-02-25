@@ -34,30 +34,30 @@ function App() {
   function getExp () {
     fetch('/api/experiences')
     .then(r => r.json())
-    .then((exp) => setExp(exp))
+    .then((exp) => dispatch(addExp(exp)))
   }
 
-  function addExp (e) {
-    setExp((currExp) => [...currExp, e])
-  }
+  // function addExp (e) {
+  //   setExp((currExp) => [...currExp, e])
+  // }
 
-  function delExp (delE) {
-    setExp((currExp) => currExp.filter(e => (
-      e.id != delE.id
-    )))
-  }
+  // function delExp (delE) {
+  //   setExp((currExp) => currExp.filter(e => (
+  //     e.id != delE.id
+  //   )))
+  // }
 
-  function updateExp (e) {
-    const newList = exp.map(oldExp => {
-      if (e.id === oldExp.id) {
-        return e;
-      } else {
-        return oldExp;
-      }
-    });
+  // function updateExp (e) {
+  //   const newList = exp.map(oldExp => {
+  //     if (e.id === oldExp.id) {
+  //       return e;
+  //     } else {
+  //       return oldExp;
+  //     }
+  //   });
 
-    setExp(newList);
-  }
+  //   setExp(newList);
+  // }
 
   if (!user) return (
     <>
@@ -75,23 +75,23 @@ function App() {
       <Routes>
         <Route 
           path="/experiences/new" 
-          element={<ExpForm addExp={addExp}/>} 
+          element={<ExpForm/>} 
         />
         <Route 
           path="/experiences/:id/edit" 
-          element={<EditForm updateExp={updateExp} exp={exp}/>} 
+          element={<EditForm/>} 
         />
         <Route 
           path="/experiences/:id" 
-          element={<ExpID delExp={delExp}/>} 
+          element={<ExpID/>} 
         />
         <Route 
           path="/experiences" 
-          element={<ExpContainer experiences={exp}/>} 
+          element={<ExpContainer/>} 
         />
         <Route 
           exact path='/' 
-          element={<Home exp={exp}/>} 
+          element={<Home/>} 
         />
         <Route
           path='/auth'
