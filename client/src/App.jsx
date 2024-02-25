@@ -1,5 +1,5 @@
 import { createGlobalStyle, styled } from 'styled-components'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Navbar from './components/NavBar'
 import AuthPage from './components/AuthPage'
 import { Routes, Route } from 'react-router-dom'
@@ -13,10 +13,6 @@ import { setUser } from './slices/userSlice'
 import { useSelector } from 'react-redux'
 
 function App() {
-  // const [user, setUser] = useState(null)
-  // remove useState import once this is gone
-  const [exp, setExp] = useState([])
-
   const dispatch = useDispatch()
   const user = useSelector(state => state.user.value)
 
@@ -75,7 +71,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <Navbar delUser={setUser}/>
+      <Navbar/>
       <Routes>
         <Route 
           path="/experiences/new" 

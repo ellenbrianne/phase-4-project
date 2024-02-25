@@ -5,10 +5,12 @@ import { BrowserRouter } from 'react-router-dom'
 import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 import userReducer from './slices/userSlice'
+import expReducer from './slices/expSlice'
 
 const store = configureStore({
   reducer: { 
-    user: userReducer 
+    user: userReducer,
+    exp: expReducer
   }
 })
 
