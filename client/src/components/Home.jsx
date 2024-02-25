@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom'
 import ExpCard from './ExpCard'
 import { useSelector } from 'react-redux'
 
-function Home ({ exp }) {
+function Home () {
 
     const user = useSelector(state => state.user.value) 
+    const exp = useSelector(state => state.exp.value)
 
     const expDisplay = exp.filter(e => e.user_id == user.id).map(e => (
          <ExpCard key={e.id} experience={e} />
