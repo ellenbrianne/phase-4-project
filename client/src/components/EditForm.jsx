@@ -3,10 +3,14 @@ import React, { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateExp } from '../slices/expSlice'
 
-function EditForm ({ updateExp, exp }) {
+function EditForm () {
     const params = useParams()
     const nav = useNavigate()
+    const dispatch = useDispatch()
+    const exp = useSelector(state => state.exp.arr)
     const [errors, setErrors]= useState([])
 
     const expObj = exp.find(e => e.id == params.id)
@@ -43,7 +47,7 @@ function EditForm ({ updateExp, exp }) {
             .then(r => {
               if(r.ok){
                 r.json().then(e => {
-                    updateExp(e)
+                    dispatch(updateExp(e))
                     nav(`/experiences/${params.id}`)
                 })
               } else {

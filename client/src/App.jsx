@@ -38,16 +38,6 @@ function App() {
     .then((arr) => dispatch(setExp(arr)))
   }
 
-  // function addExp (e) {
-  //   setExp((currExp) => [...currExp, e])
-  // }
-
-  // function delExp (delE) {
-  //   setExp((currExp) => currExp.filter(e => (
-  //     e.id != delE.id
-  //   )))
-  // }
-
   // function updateExp (e) {
   //   const newList = exp.map(oldExp => {
   //     if (e.id === oldExp.id) {
