@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-// import { delExp } from '../slices/expSlice'
+import { delExp } from '../slices/expSlice'
 
 function ExpID () {
   const [access, setAccess] = useState(false)
@@ -27,8 +27,8 @@ function ExpID () {
   })
   const params = useParams()
   const nav = useNavigate()
-  const currUser = useSelector(state => state.user.value)
   const dispatch = useDispatch()
+  const currUser = useSelector(state => state.user.value)
 
   const { id, length, location, rating, user } = ind
 
@@ -53,7 +53,7 @@ function ExpID () {
       method: "DELETE" 
     }).then(r => {
         if (r.ok) {
-            // dispatch(delExp(id))
+            dispatch(delExp(id))
             nav('/')
         } else {
             r.json().then(error => setErrors(error))
