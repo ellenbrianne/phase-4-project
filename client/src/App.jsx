@@ -11,7 +11,7 @@ import EditForm from './components/EditForm'
 import { useDispatch } from 'react-redux'
 import { setUser } from './slices/userSlice'
 import { useSelector } from 'react-redux'
-import { addExp } from './slices/expSlice'
+import { setExp } from './slices/expSlice'
 
 function App() {
   const dispatch = useDispatch()
@@ -35,7 +35,7 @@ function App() {
   function getExp () {
     fetch('/api/experiences')
     .then(r => r.json())
-    .then((exp) => dispatch(addExp(exp)))
+    .then((arr) => dispatch(setExp(arr)))
   }
 
   // function addExp (e) {

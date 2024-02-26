@@ -1,34 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const expSlice = createSlice({
-    name: "exp",
+    name: 'exp',
     initialState: {
         arr: []
     },
     reducers: {
-        addExp: (arr, action) => {
-            return [
-                ...arr.slice(0, action.index),
-                action.item,
-                ...arr.slice(action.index)
-            ]
+        setExp: (state, action) => {
+            const newState = [...action.payload]
+            state.arr = newState
         },
-        delExp: (state, action) => {
-            state.value = state.value.filter(e => (
-                e.id != action.payload.id
-            ))
-        },
-        updateExp: (state, action) => {
-            state.value = exp.map(e => {
-                if (action.payload.id === e.id) {
-                    return action.payload
-                } else {
-                    return e
-                }
-            })
+        addExp: (state, action) => {
+            const addedState = [...state.arr, action.payload]
+            state.arr = addedState
         }
     }
 })
 
-export const { addExp, delExp, updateExp }  = expSlice.actions 
+export const { setExp, addExp }  = expSlice.actions 
 export default expSlice.reducer 

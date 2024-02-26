@@ -3,11 +3,13 @@ import React, { useState } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { addExp } from '../slices/expSlice'
 
-function ExpForm ({ addExp }) {
+function ExpForm () {
     const [errors, setErrors] = useState([])
     const nav = useNavigate()
+    const dispatch = useDispatch()
 
     const user = useSelector(state => state.user.value)
 
@@ -47,7 +49,7 @@ function ExpForm ({ addExp }) {
             .then(r => {
               if(r.ok){
                 r.json().then(exp => {
-                  addExp(exp)
+                  dispatch(addExp(exp))
                   nav('/')
                 })
               } else {

@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 function Home () {
 
     const user = useSelector(state => state.user.value) 
-    const exp = useSelector(state => state.exp.value)
+    const exp = useSelector(state => state.exp.arr)
 
     const expDisplay = exp.filter(e => e.user_id == user.id).map(e => (
          <ExpCard key={e.id} experience={e} />
