@@ -1,6 +1,6 @@
 from config import app, db, api
 from flask_restful import Resource
-from flask import request, make_response, session, render_template
+from flask import request, make_response, session
 from models import User, Location, Experience, Rating
 
 
@@ -124,12 +124,6 @@ class ExperienceID(Resource):
             return ('Invalid form input', 422)
         
 api.add_resource(ExperienceID, '/experiences/<int:id>')
-
-# save for deployment
-# @app.route('/')
-# @app.route('/<int:id>')
-# def index(ind=0):
-#     return render_template("index.html")
 
 if __name__ == "__main__":
   app.run(port=5555, debug=True)

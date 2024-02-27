@@ -20,12 +20,7 @@ naming_convention = {
 
 metadata = MetaData(naming_convention=naming_convention)
 
-app = Flask(__name__,
-            # save for deployment
-            # static_url_path='',
-            # static_folder='../client/dist',
-            # template_folder='../client/dist'
-            )
+app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY")
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URI")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False

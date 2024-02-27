@@ -47,7 +47,7 @@ class Location(db.Model, SerializerMixin):
         if value == '':
             raise ValueError(f'{value} cannot be blank')
         else:
-            return value
+            return value.upper()
 
 class Experience(db.Model, SerializerMixin):
     __tablename__ = "experiences"
