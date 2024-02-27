@@ -63,7 +63,6 @@ class Experience(db.Model, SerializerMixin):
     location = db.relationship('Location', back_populates='experiences')
     user = db.relationship('User', back_populates='experiences')
     rating = db.relationship('Rating', back_populates='experiences')
-
     
         
 class Rating(db.Model, SerializerMixin):

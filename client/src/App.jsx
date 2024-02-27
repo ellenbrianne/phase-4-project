@@ -38,18 +38,6 @@ function App() {
     .then((arr) => dispatch(setExp(arr)))
   }
 
-  // function updateExp (e) {
-  //   const newList = exp.map(oldExp => {
-  //     if (e.id === oldExp.id) {
-  //       return e;
-  //     } else {
-  //       return oldExp;
-  //     }
-  //   });
-
-  //   setExp(newList);
-  // }
-
   if (!user) return (
     <>
       <GlobalStyle />
